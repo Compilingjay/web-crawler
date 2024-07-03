@@ -1,3 +1,5 @@
+import { crawl_page } from "./crawl.js";
+
 function main() {
     const argv = process.argv;
     if (argv.length < 3) {
@@ -8,7 +10,10 @@ function main() {
         process.exit(2);
     }
 
-    console.log(`Crawler beginning at: ${argv[2]}`);
+    const url = argv[2]
+    console.log(`Crawler beginning at: ${url}`);
+    const pages = crawl_page(url)
+    console.log(pages)
 }
 
 main()
