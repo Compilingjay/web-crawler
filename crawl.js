@@ -67,7 +67,7 @@ async function crawl_page(base_URL, current_URL = base_URL, pages = {}) {
 
     pages[normalized_url] = 1;
 
-    console.log(`Crawling ${current_URL}`)
+    console.log(`Crawling ${current_URL}`);
     let html = '';
     try {
         html = await fetch_page_HTML(current_URL);
@@ -84,4 +84,23 @@ async function crawl_page(base_URL, current_URL = base_URL, pages = {}) {
     return pages;
 }
 
-export { normalize_URL, get_URLs_from_HTML, crawl_page };
+function print_report(pages) {
+    console.log("Pages crawled, # times:");
+    let ordered_pages = [];
+
+    for (const key in pages) {
+        const value = pages[key];
+        ordered_pages.push([key, value]);
+    }
+
+    ordered_pages.sort(function(a, b) {
+        if (a[1] < b[1]) {
+            return 1;
+        }
+        return -1;
+    });
+
+    ordered_pages.forEach(page => console.log(`    ${page[0]} - ${page[1]}`));
+}
+
+export { normalize_URL, get_URLs_from_HTML, crawl_page, print_report }

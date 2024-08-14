@@ -1,4 +1,4 @@
-import { crawl_page } from "./crawl.js";
+import { crawl_page, print_report } from "./crawl.js";
 
 async function main() {
     const argv = process.argv;
@@ -14,7 +14,7 @@ async function main() {
     console.log(`Crawler beginning at: ${url}`);
     try {
         const pages = await crawl_page(url);
-        console.log(pages);
+        print_report(pages);
     } catch (err) {
         console.log(`Error: ${err.message}`);
     }
