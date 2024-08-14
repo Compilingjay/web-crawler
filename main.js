@@ -1,6 +1,6 @@
 import { crawl_page } from "./crawl.js";
 
-function main() {
+async function main() {
     const argv = process.argv;
     if (argv.length < 3) {
         console.log("Website url not provided");
@@ -12,8 +12,12 @@ function main() {
 
     const url = argv[2]
     console.log(`Crawler beginning at: ${url}`);
-    const pages = crawl_page(url)
-    console.log(pages)
+    try {
+        const pages = await crawl_page(url);
+        console.log(pages);
+    } catch (err) {
+        console.log(`Error: ${err.message}`);
+    }
 }
 
-main()
+await main()
